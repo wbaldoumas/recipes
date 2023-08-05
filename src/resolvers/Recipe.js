@@ -10,5 +10,13 @@ module.exports = {
     __resolveReference: ({id}, {dataSources}) => {
       return dataSources.recipesAPI.getRecipe(id);
     },
+    cookware(recipe, _, { dataSources }) {
+      const cookwareNamesList = dataSources.recipesAPI.getRecipeCookware(recipe.id);
+      if (!cookwareNamesList) return;
+    
+      return cookwareNamesList.map((c) => ({
+        name: c,
+      }));
+    },
   },
 };
